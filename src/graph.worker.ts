@@ -20,6 +20,23 @@ export type AnalyticsData = {
     unreachableCount: number
   }
   articulationPoints: { word: string; degree: number }[]
+  palindromes: string[]
+  anagramClusters: {
+    totalGroups: number
+    top: { letters: string; words: string[]; count: number }[]
+  }
+  archipelago: {
+    componentCount: number
+    mainComponentSize: number
+    islandSizes: number[]
+    mainHasPoop: boolean
+  }
+  thoroughfare: { word: string; score: number }[]
+  poopGravity: {
+    totalConstant: number
+    distanceBreakdown: { distance: number; wordCount: number; totalForce: number }[]
+    poopDegree: number
+  }
 }
 
 type WorkerOutMsg =
@@ -206,12 +223,156 @@ function computeArticulationPoints(): AnalyticsData['articulationPoints'] {
     .sort((a, b) => b.degree - a.degree)
 }
 
+function computePalindromes(): string[] {
+  return [...wordSet]
+    .filter(w => w[0] === w[3] && w[1] === w[2])
+    .sort()
+}
+
+function computeAnagramClusters(): AnalyticsData['anagramClusters'] {
+  const groups = new Map<string, string[]>()
+  for (const word of wordSet) {
+    const key = [...word].sort().join('')
+    if (!groups.has(key)) groups.set(key, [])
+    groups.get(key)!.push(word)
+  }
+  const clusters = [...groups.values()]
+    .filter(g => g.length > 1)
+    .sort((a, b) => b.length - a.length)
+  return {
+    totalGroups: clusters.length,
+    top: clusters.slice(0, 6).map(words => {
+      const sorted = words.slice().sort()
+      return { letters: [...sorted[0]].sort().join(''), words: sorted, count: sorted.length }
+    }),
+  }
+}
+
+function computeArchipelago(): AnalyticsData['archipelago'] {
+  const visited = new Set<string>()
+  const components: { size: number; hasPoop: boolean }[] = []
+
+  for (const start of wordSet) {
+    if (visited.has(start)) continue
+    const queue: string[] = [start]
+    visited.add(start)
+    let size = 0
+    let hasPoop = false
+    while (queue.length > 0) {
+      const node = queue.shift()!
+      size++
+      if (node === 'POOP') hasPoop = true
+      for (const neighbor of adjacency.get(node) ?? []) {
+        if (!visited.has(neighbor)) {
+          visited.add(neighbor)
+          queue.push(neighbor)
+        }
+      }
+    }
+    components.push({ size, hasPoop })
+  }
+
+  components.sort((a, b) => b.size - a.size)
+  const main = components[0] ?? { size: 0, hasPoop: false }
+  return {
+    componentCount: components.length,
+    mainComponentSize: main.size,
+    islandSizes: components.slice(1, 6).map(c => c.size),
+    mainHasPoop: main.hasPoop,
+  }
+}
+
+function computeThoroughfare(): AnalyticsData['thoroughfare'] {
+  const scores = new Map<string, number>()
+  const words = [...wordSet]
+  const SAMPLE = Math.min(80, words.length)
+  const step = Math.max(1, Math.floor(words.length / SAMPLE))
+  const sources: string[] = []
+  for (let i = 0; i < words.length && sources.length < SAMPLE; i += step) {
+    sources.push(words[i])
+  }
+
+  for (const source of sources) {
+    const prev = new Map<string, string | null>([[source, null]])
+    const queue: string[] = [source]
+    while (queue.length > 0) {
+      const node = queue.shift()!
+      for (const neighbor of adjacency.get(node) ?? []) {
+        if (!prev.has(neighbor)) {
+          prev.set(neighbor, node)
+          queue.push(neighbor)
+        }
+      }
+    }
+    for (const dest of sources) {
+      if (dest === source || !prev.has(dest)) continue
+      let cur: string | null | undefined = prev.get(dest)
+      while (cur && cur !== source) {
+        scores.set(cur, (scores.get(cur) ?? 0) + 1)
+        cur = prev.get(cur)
+      }
+    }
+  }
+
+  return [...scores.entries()]
+    .map(([word, score]) => ({ word, score }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8)
+}
+
+function computePoopGravity(): AnalyticsData['poopGravity'] {
+  if (!wordSet.has('POOP')) {
+    return { totalConstant: 0, distanceBreakdown: [], poopDegree: 0 }
+  }
+
+  const distances = new Map<string, number>([['POOP', 0]])
+  const queue: string[] = ['POOP']
+  while (queue.length > 0) {
+    const word = queue.shift()!
+    const dist = distances.get(word)!
+    for (const neighbor of adjacency.get(word) ?? []) {
+      if (!distances.has(neighbor)) {
+        distances.set(neighbor, dist + 1)
+        queue.push(neighbor)
+      }
+    }
+  }
+
+  const byDist = new Map<number, number>()
+  let total = 0
+  for (const [word, dist] of distances) {
+    if (word === 'POOP' || dist === 0) continue
+    total += 1 / (dist * dist)
+    byDist.set(dist, (byDist.get(dist) ?? 0) + 1)
+  }
+
+  const distanceBreakdown = [...byDist.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .slice(0, 8)
+    .map(([distance, wordCount]) => ({
+      distance,
+      wordCount,
+      totalForce: Math.round((wordCount / (distance * distance)) * 100) / 100,
+    }))
+
+  return {
+    totalConstant: Math.round(total * 100) / 100,
+    distanceBreakdown,
+    poopDegree: adjacency.get('POOP')?.length ?? 0,
+  }
+}
+
 function computeAnalytics(): AnalyticsData {
   return {
     socialites: computeSocialites(),
     hermits: computeHermits(),
     poopHorizon: computePoopHorizon(),
     articulationPoints: computeArticulationPoints(),
+    palindromes: computePalindromes(),
+    anagramClusters: computeAnagramClusters(),
+    archipelago: computeArchipelago(),
+    thoroughfare: computeThoroughfare(),
+    poopGravity: computePoopGravity(),
   }
 }
 

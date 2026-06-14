@@ -215,9 +215,13 @@ function App() {
           variants={fadeUp}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <h1 className="site-title">POODLE</h1>
+          <h1 className="site-title">
+            <span>POOP</span><span className="title-le">LE</span>
+            <span>ORAC</span><span className="title-le">LE</span>
+          </h1>
           <p className="site-subtitle">
-            The Lexical Path to <span className="poop">POOP</span>.
+            The Lexical Path to <span className="poop">POOP</span>.{' '}
+            <a href="https://poople.io/" target="_blank" rel="noopener noreferrer" className="poople-link">Play the original →</a>
           </p>
         </motion.header>
 

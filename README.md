@@ -1,8 +1,8 @@
-# POODLE
+# POOPLE ORACLE
 
 **The Lexical Path to POOP.**
 
-POODLE is a word-ladder visualiser with a fixed destination: **POOP**. Starting from any valid 4-letter word, the app finds the shortest chain of single-letter substitutions that leads to POOP, with every step also being a valid English word.
+POOPLE ORACLE is a word-ladder visualiser built around [Poople](https://poople.io/), the daily word-connection game. Starting from any valid 4-letter word, the app finds the shortest chain of single-letter substitutions that leads to POOP, with every step also being a valid English word.
 
 For example:
 
@@ -94,7 +94,7 @@ Canvas rendering is mandatory here. DOM-based graph libraries (e.g. those that c
 
 ### Custom canvas drawing
 
-The library exposes `nodeCanvasObject` and `linkCanvasObject` callbacks that receive the raw `CanvasRenderingContext2D`. POODLE uses these to draw five distinct node states:
+The library exposes `nodeCanvasObject` and `linkCanvasObject` callbacks that receive the raw `CanvasRenderingContext2D`. POOPLE ORACLE uses these to draw five distinct node states:
 
 | Node state | Radius | Colour |
 |---|---|---|

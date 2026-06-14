@@ -26,6 +26,23 @@ export type AnalyticsData = {
     unreachableCount: number
   }
   articulationPoints: { word: string; degree: number }[]
+  palindromes: string[]
+  anagramClusters: {
+    totalGroups: number
+    top: { letters: string; words: string[]; count: number }[]
+  }
+  archipelago: {
+    componentCount: number
+    mainComponentSize: number
+    islandSizes: number[]
+    mainHasPoop: boolean
+  }
+  thoroughfare: { word: string; score: number }[]
+  poopGravity: {
+    totalConstant: number
+    distanceBreakdown: { distance: number; wordCount: number; totalForce: number }[]
+    poopDegree: number
+  }
 }
 
 type WorkerOutMsg =

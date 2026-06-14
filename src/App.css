@@ -20,6 +20,14 @@
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--text-primary);
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+.title-le {
+  color: var(--bg-color);
+  background: var(--accent-neon);
+  padding: 0 0.05em;
 }
 
 .site-subtitle {
@@ -33,6 +41,17 @@
 
 .site-subtitle .poop {
   color: var(--accent-poop);
+}
+
+.poople-link {
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.poople-link:hover {
+  opacity: 1;
 }
 
 /* ── Tab Navigation ── */
@@ -574,4 +593,359 @@
   font-size: 0.5rem;
   color: rgba(255, 0, 127, 0.3);
   align-self: center;
+}
+
+/* ── Palindrome Society (05) ── */
+.palindrome-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.palindrome-count-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent-neon);
+  text-shadow: 0 0 28px rgba(214, 255, 0, 0.25);
+}
+
+.palindrome-count-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(239, 236, 230, 0.22);
+}
+
+.palindrome-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 4px;
+}
+
+.palindrome-word {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: rgba(239, 236, 230, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  cursor: default;
+}
+
+.palindrome-word--poop {
+  color: var(--accent-poop);
+  font-size: 1rem;
+  text-shadow: 0 0 14px rgba(255, 0, 127, 0.35);
+}
+
+.palindrome-half {
+  letter-spacing: 0.15em;
+}
+
+.palindrome-half--right {
+  color: rgba(239, 236, 230, 0.18);
+}
+
+.palindrome-word--poop .palindrome-half--right {
+  color: rgba(255, 0, 127, 0.4);
+}
+
+.palindrome-sep {
+  font-size: 0.45rem;
+  color: rgba(239, 236, 230, 0.1);
+  padding: 0 1px;
+}
+
+/* ── Anagram Census (06) ── */
+.anagram-total-display {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.anagram-total-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent-neon);
+  text-shadow: 0 0 28px rgba(214, 255, 0, 0.25);
+}
+
+.anagram-cluster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.anagram-cluster {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.anagram-cluster-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5625rem;
+  color: rgba(239, 236, 230, 0.18);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.anagram-cluster-words {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.anagram-word {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  cursor: default;
+}
+
+.anagram-sep {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: rgba(239, 236, 230, 0.14);
+}
+
+/* ── Archipelago (07) ── */
+.archipelago-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.archipelago-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.archipelago-row-rank {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  color: rgba(239, 236, 230, 0.18);
+  flex-shrink: 0;
+  width: 28px;
+}
+
+.archipelago-row--main .archipelago-row-rank {
+  color: rgba(214, 255, 0, 0.35);
+}
+
+.archipelago-row-size {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  min-width: 48px;
+}
+
+.archipelago-row--main .archipelago-row-size {
+  color: var(--accent-neon);
+}
+
+.archipelago-row-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(239, 236, 230, 0.2);
+}
+
+.archipelago-row--main .archipelago-row-label {
+  color: rgba(214, 255, 0, 0.5);
+}
+
+/* ── Lexical Thoroughfare (08) ── */
+.thoroughfare-marquee {
+  overflow: hidden;
+  border-top: 1px solid rgba(239, 236, 230, 0.05);
+  border-bottom: 1px solid rgba(239, 236, 230, 0.05);
+  padding: 12px 0;
+  margin: 4px 0;
+}
+
+.thoroughfare-marquee-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: thoroughfare-scroll 22s linear infinite;
+}
+
+.thoroughfare-marquee-word {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.625rem;
+  letter-spacing: 0.04em;
+  color: rgba(214, 255, 0, 0.09);
+  padding: 0 28px;
+}
+
+@keyframes thoroughfare-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.thoroughfare-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 4px;
+}
+
+.thoroughfare-row {
+  display: grid;
+  grid-template-columns: 26px 60px 1fr 52px;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(239, 236, 230, 0.04);
+  cursor: default;
+}
+
+.thoroughfare-rank {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5625rem;
+  color: rgba(239, 236, 230, 0.16);
+  letter-spacing: 0.08em;
+}
+
+.thoroughfare-word {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.thoroughfare-bar {
+  height: 2px;
+  background: rgba(239, 236, 230, 0.06);
+  position: relative;
+}
+
+.thoroughfare-bar-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-neon);
+  opacity: 0.55;
+}
+
+.thoroughfare-score {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5625rem;
+  color: rgba(239, 236, 230, 0.28);
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+/* ── POOP Gravity Index (09) ── */
+.gravity-constant {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 0, 127, 0.08);
+  border-bottom: 1px solid rgba(255, 0, 127, 0.08);
+  margin: 4px 0;
+}
+
+.gravity-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  color: rgba(239, 236, 230, 0.28);
+}
+
+.gravity-value {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent-poop);
+  text-shadow: 0 0 32px rgba(255, 0, 127, 0.3);
+}
+
+.gravity-unit {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 0, 127, 0.38);
+}
+
+.gravity-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6875rem;
+}
+
+.gravity-breakdown-header {
+  display: grid;
+  grid-template-columns: 56px 80px 120px 1fr;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(239, 236, 230, 0.06);
+  font-size: 0.4375rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(239, 236, 230, 0.16);
+}
+
+.gravity-breakdown-row {
+  display: grid;
+  grid-template-columns: 56px 80px 120px 1fr;
+  gap: 12px;
+  padding: 3px 0;
+}
+
+.gravity-bd-dist {
+  color: rgba(239, 236, 230, 0.32);
+  letter-spacing: 0.06em;
+}
+
+.gravity-bd-count {
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.gravity-bd-force {
+  color: rgba(255, 0, 127, 0.55);
+  letter-spacing: 0.04em;
+}
+
+.gravity-bd-total {
+  color: var(--accent-neon);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
+
+.gravity-footnote {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(239, 236, 230, 0.13);
+  margin-top: 8px;
 }
