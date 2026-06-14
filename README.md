@@ -140,4 +140,4 @@ npm run build      # outputs to dist/
 npm run preview    # local preview of the production build
 ```
 
-The GitHub Pages deployment uses the base path `/poople-solver/` (set in `vite.config.ts`).
+The GitHub Pages deployment uses the base path `/poople-oracle/` (set in `vite.config.ts`).
